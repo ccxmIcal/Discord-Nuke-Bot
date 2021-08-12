@@ -1,4 +1,7 @@
-# Add your bot token at line 16
+# Made by Sync#5666
+# Make sure you add your bot token in the token.json file.
+# Before using it you must activate the intents for your own bot. In the discord application website. (https://imgur.com/7zjjTqI)
+# When generating the invite code for your bot make sure you give it Administrator Permissions.
 
 import os
 import discord
@@ -8,12 +11,15 @@ import requests
 from discord.ext import commands
 import colorama
 from colorama import Fore, Back, Style
+import json
 
 intents = discord.Intents().all()
 intents.members = True
 
+with open('token.json', 'r') as df:
+    data = json.loads(df.read())
+    TOKEN = data['token']
 
-TOKEN = ''
 prefix = '>'
 
 CHANNEL_NAME = "Sall Server"
@@ -47,6 +53,9 @@ async def on_ready():
   print(f"{bot.user.name} is ready.")
   clear()
   banner()
+  print(f'{Fore.GREEN} Logged in as{Fore.RED} {bot.user}.{Fore.GREEN}Currently in {Fore.RED}{len(bot.guilds)}{Fore.GREEN} guilds.')
+  await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Made by Sync#5666"))
+  os.system(f'title Made by Sync#5666 (https://github.com/ccxmIcal). Logged in as {bot.user}. Currently in {len(bot.guilds)} guilds.')
 
 @bot.command()
 async def help(ctx):
